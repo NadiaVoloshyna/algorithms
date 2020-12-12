@@ -423,19 +423,137 @@
 // average = 0.0;
 // }
 
-let grades = [[34, 56, 78], [15, 64, 33], [23, 90, 45]];
-let total = 0;
-let average = 0.0;
+// let grades = [[34, 56, 78], [15, 64, 33], [23, 90, 45]];
+// let total = 0;
+// let average = 0.0;
 
-for(let col = 0; col < grades.length; ++col) {
-    for(let row = 0; row < grades[col].length; ++row) {
-    total += grades[row][col];
+// for(let col = 0; col < grades.length; ++col) {
+//     for(let row = 0; row < grades[col].length; ++row) {
+//     total += grades[row][col];
+// }
+// average = total / grades[col].length;
+// console.log(`Student ${col+1} average: ${average.toFixed(2)}`);
+// total = 0;
+// average = 0.0;
+// }
+
+//Jagged Arrays.........................................................
+// let grades = [[34, 56], [15, 64, 33, 88], [23, 90, 45]];
+// let total = 0;
+// let average = 0.0;
+
+// for(let row = 0; row < grades.length; ++row) {
+//     for(let col = 0; col < grades[row].length; ++col) {
+//     total += grades[row][col];
+// }
+//     average = total / grades[row].length;
+//     console.log(`Student ${row + 1} has grades: ${average.toFixed(2)}`);
+//     total = 0;
+//     average = 0.0;
+// }
+
+//Arrays of Objects.....................................................
+// function Point (x,y) {
+//     this.x = x;
+//     this.y = y;
+// }
+
+// let p1 = new Point(1,2);
+// let p2 = new Point(3,4);
+// let p3 = new Point(5,6);
+// let p4 = new Point(7,8);
+
+// let pts = [p1,p2,p3,p4];
+// for(let i = 0; i < pts.length; ++i) {
+//     console.log(`Point ${parseInt(i+1)}: ${pts[i].x}, ${pts[i].y}`)
+// }
+
+// let displayPts = (arr) => {
+//     for(let i = 0; i < arr.length; ++i) {
+//         console.log(`${arr[i].x}, ${arr[i].y}`)
+//     }
+    
+// }
+// let p5 = new Point(12,-3);
+// pts.push(p5);
+// console.log("After push: ")
+// displayPts(pts);
+// pts.shift();
+// console.log("After shift: ")
+// displayPts(pts);
+
+//Arrays in Objects.....................................................
+// function weekTemps() {
+//     this.dataStorage = [];
+//     this.add = add;
+//     this.average = average;
+// }
+
+// function add(temp) {
+//     this.dataStorage.push(temp);
+// }
+
+// function average() {
+//     let total = 0;
+//     for(let i = 0; i < this.dataStorage.length; ++i) {
+//         total += this.dataStorage[i];
+//     }
+//     return total / this.dataStorage.length;
+// }
+
+// let thisWeek = new weekTemps();
+// thisWeek.add(23);
+// thisWeek.add(25);
+// thisWeek.add(26);
+// thisWeek.add(21);
+// thisWeek.add(20);
+// thisWeek.add(18);
+// thisWeek.add(22);
+
+// console.log(thisWeek.average().toFixed(2));
+
+//Exercises..............................................................
+// function Grades() {
+//     this.store = [];
+//     this.add = add;
+//     this.display = display;
+// }
+
+// function add(grade) {
+//     this.store.push(grade);
+// }
+
+// function display() {
+//     let total = 0;
+//     for(let i =0; i < this.store.length; ++i) {
+//         total += this.store[i];
+//     }
+//     console.log(total / this.store.length);
+// }
+
+// let currentGrades = new Grades();
+// currentGrades.add(23);
+// currentGrades.add(33);
+// currentGrades.add(43);
+// currentGrades.add(53);
+// currentGrades.add(63);
+
+// currentGrades.display();
+
+let words = [['cap ', 'jacket ', 'coat '], ['man ', 'woman ', 'kid '], ['sun ', 'moon ', 'planet ']];
+
+for(let row = 0; row < words.length; ++row) {
+    let total = [];
+    for(let col = 0; col < words[row].length; ++col) {
+        total += words[row][col];
+    }
+    console.log(`This row is: ${total}`);
 }
-average = total / grades[col].length;
-console.log(`Student ${col+1} average: ${average.toFixed(2)}`);
-total = 0;
-average = 0.0;
+
+for(let col = 0; col < words.length; ++col) {
+    let total = [];
+    for(let row = 0; row < words.length; ++row) {
+        total += words[row][col];
+    }
+    console.log(`This col is: ${total}`);
 }
-
-
-
