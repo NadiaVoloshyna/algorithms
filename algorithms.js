@@ -540,20 +540,90 @@
 
 // currentGrades.display();
 
-let words = [['cap ', 'jacket ', 'coat '], ['man ', 'woman ', 'kid '], ['sun ', 'moon ', 'planet ']];
 
-for(let row = 0; row < words.length; ++row) {
-    let total = [];
-    for(let col = 0; col < words[row].length; ++col) {
-        total += words[row][col];
+
+// let words = [['cap ', 'jacket ', 'coat '], ['man ', 'woman ', 'kid '], ['sun ', 'moon ', 'planet ']];
+
+// for(let row = 0; row < words.length; ++row) {
+//     let total = [];
+//     for(let col = 0; col < words[row].length; ++col) {
+//         total += words[row][col];
+//     }
+//     console.log(`This row is: ${total}`);
+// }
+
+// for(let col = 0; col < words.length; ++col) {
+//     let total = [];
+//     for(let row = 0; row < words.length; ++row) {
+//         total += words[row][col];
+//     }
+//     console.log(`This col is: ${total}`);
+// }
+
+
+
+function monthTemps() {
+    this.dataStorage = [];
+    this.add = add;
+    this.monthAverage = monthAverage;
+    this.weekAverage = weekAverage;
+    this.allWeeksAverage = allWeeksAverage;
+
+    function add (temp) {
+        let rows = 4;
+        let cols = 7;
+        for(let i = 0; i < rows; ++i) {
+            this.dataStorage.push([]);
+            this.dataStorage[i].push([]);
+
+        for(let j = 0; j < cols; ++j) {
+            this.dataStorage[i][j] = temp[i][j];
+            }
+        }
     }
-    console.log(`This row is: ${total}`);
+
+    function monthAverage () {
+        let total = 0;
+        for(let row = 0; row < this.dataStorage.length; ++row) {
+            for(let col = 0; col < this.dataStorage[row].length; ++col) {
+                total += this.dataStorage[row][col];
+            }
+        }
+        return total / 30;
+    }
+
+    function weekAverage () {
+        let total = 0;
+        let row = 0;
+            for(let col = 0; col < this.dataStorage[row].length; ++col) {
+                total += this.dataStorage[row][col];
+            }
+        
+        return total / 7;
+    }
+
+    function allWeeksAverage () {
+        let total = 0;
+        let average = 0.00;
+        for(let row = 0; row < this.dataStorage.length; ++row) {
+            for(let col = 0; col < this.dataStorage[row].length; ++col) {
+                total += this.dataStorage[row][col];
+            }
+        average = total / 7;
+        console.log(`Week's ${row + 1} average temperature is ${average.toFixed(2)}`);
+        total = 0;
+        average = 0.00;
+        }    
+      
+    }
 }
 
-for(let col = 0; col < words.length; ++col) {
-    let total = [];
-    for(let row = 0; row < words.length; ++row) {
-        total += words[row][col];
-    }
-    console.log(`This col is: ${total}`);
-}
+let newMonth = new monthTemps();
+newMonth.add([[10,21,22,13,14,25,16],[17,18,29,20,21,12,23],[24,15,26,27,88,29,30],[21,32,33,34,35,36,17]]);
+
+console.log(newMonth.dataStorage);
+console.log(newMonth.monthAverage().toFixed(2));
+console.log(newMonth.weekAverage().toFixed(2));
+newMonth.allWeeksAverage();
+
+
