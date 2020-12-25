@@ -562,68 +562,157 @@
 
 
 
-function monthTemps() {
-    this.dataStorage = [];
-    this.add = add;
-    this.monthAverage = monthAverage;
-    this.weekAverage = weekAverage;
-    this.allWeeksAverage = allWeeksAverage;
+// function monthTemps() {
+//     this.dataStorage = [];
+//     this.add = add;
+//     this.monthAverage = monthAverage;
+//     this.weekAverage = weekAverage;
+//     this.allWeeksAverage = allWeeksAverage;
 
-    function add (temp) {
-        let rows = 4;
-        let cols = 7;
-        for(let i = 0; i < rows; ++i) {
-            this.dataStorage.push([]);
-            this.dataStorage[i].push([]);
+//     function add (temp) {
+//         let rows = 4;
+//         let cols = 7;
+//         for(let i = 0; i < rows; ++i) {
+//             this.dataStorage.push([]);
+//             this.dataStorage[i].push([]);
 
-        for(let j = 0; j < cols; ++j) {
-            this.dataStorage[i][j] = temp[i][j];
-            }
-        }
-    }
+//         for(let j = 0; j < cols; ++j) {
+//             this.dataStorage[i][j] = temp[i][j];
+//             }
+//         }
+//     }
 
-    function monthAverage () {
-        let total = 0;
-        for(let row = 0; row < this.dataStorage.length; ++row) {
-            for(let col = 0; col < this.dataStorage[row].length; ++col) {
-                total += this.dataStorage[row][col];
-            }
-        }
-        return total / 30;
-    }
+//     function monthAverage () {
+//         let total = 0;
+//         for(let row = 0; row < this.dataStorage.length; ++row) {
+//             for(let col = 0; col < this.dataStorage[row].length; ++col) {
+//                 total += this.dataStorage[row][col];
+//             }
+//         }
+//         return total / 30;
+//     }
 
-    function weekAverage () {
-        let total = 0;
-        let row = 0;
-            for(let col = 0; col < this.dataStorage[row].length; ++col) {
-                total += this.dataStorage[row][col];
-            }
+//     function weekAverage () {
+//         let total = 0;
+//         let row = 0;
+//             for(let col = 0; col < this.dataStorage[row].length; ++col) {
+//                 total += this.dataStorage[row][col];
+//             }
         
-        return total / 7;
-    }
+//         return total / 7;
+//     }
 
-    function allWeeksAverage () {
-        let total = 0;
-        let average = 0.00;
-        for(let row = 0; row < this.dataStorage.length; ++row) {
-            for(let col = 0; col < this.dataStorage[row].length; ++col) {
-                total += this.dataStorage[row][col];
-            }
-        average = total / 7;
-        console.log(`Week's ${row + 1} average temperature is ${average.toFixed(2)}`);
-        total = 0;
-        average = 0.00;
-        }    
+//     function allWeeksAverage () {
+//         let total = 0;
+//         let average = 0.00;
+//         for(let row = 0; row < this.dataStorage.length; ++row) {
+//             for(let col = 0; col < this.dataStorage[row].length; ++col) {
+//                 total += this.dataStorage[row][col];
+//             }
+//         average = total / 7;
+//         console.log(`Week's ${row + 1} average temperature is ${average.toFixed(2)}`);
+//         total = 0;
+//         average = 0.00;
+//         }    
       
+//     }
+// }
+
+// let newMonth = new monthTemps();
+// newMonth.add([[10,21,22,13,14,25,16],[17,18,29,20,21,12,23],[24,15,26,27,88,29,30],[21,32,33,34,35,36,17]]);
+
+// console.log(newMonth.dataStorage);
+// console.log(newMonth.monthAverage().toFixed(2));
+// console.log(newMonth.weekAverage().toFixed(2));
+// newMonth.allWeeksAverage();
+
+
+
+// function Word() {
+//     this.letters = [];
+//     this.store = store;
+//     this.singleWord = singleWord;
+
+//     function store(letter) {
+//         this.letters.push(letter);
+//     }
+
+//     function singleWord() {
+//         return this.letters.join('');
+//     }  
+// }
+
+// let newWord = new Word();
+// newWord.store('h');
+// newWord.store('a');
+// newWord.store('n');
+// newWord.store('d');
+
+// console.log(newWord.letters);
+// console.log(newWord.singleWord());
+
+//Lists...................................................................
+//A List ADT..............................................................
+//A List Class Implementation.............................................
+function List() {
+    this.listSize = 0;
+    this.pos = 0;
+    this.dataStore = [];
+    this.append = append;
+    this.find = find;
+    this.remove = remove;
+    this.length = length;
+    // this.clear = clear;
+    // this.toString = toString;
+    // this.insert = insert;
+    // this.front = front;
+    // this.end = end;
+    // this.prev = prev;
+    // this.next = next;
+    // this.currPos = currPos;
+    // this.moveTo = moveTo;
+    // this.getElement = getElement;
+    // this.contains = contains;
+
+    function append(element) {
+        this.dataStore[this.listSize++] = element;
     }
+    function find(element) {
+        for(let i = 0; i < this.dataStore.length; ++i) {
+            if(this.dataStore[i] == element) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    function remove(element) {
+        let foundAt = this.find(element);
+        if(foundAt > -1) {
+            this.dataStore.splice(foundAt,1)
+            --this.listSize;
+            return true;
+        }
+        return false
+    }
+    function length() {
+        return this.listSize;
+    }
+  
+
 }
 
-let newMonth = new monthTemps();
-newMonth.add([[10,21,22,13,14,25,16],[17,18,29,20,21,12,23],[24,15,26,27,88,29,30],[21,32,33,34,35,36,17]]);
+let newList = new List();
+newList.append(1);
+newList.append('cat');
+newList.append('dog');
+newList.remove('cat');
 
-console.log(newMonth.dataStorage);
-console.log(newMonth.monthAverage().toFixed(2));
-console.log(newMonth.weekAverage().toFixed(2));
-newMonth.allWeeksAverage();
+//console.log(newList.dataStore);
+//console.log(newList.find('dog'));
+console.log(newList.length());
+
+
+
+
 
 
