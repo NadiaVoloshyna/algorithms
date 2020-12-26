@@ -780,10 +780,21 @@ function List() {
 // }
 
 //A List-Based Application................................................
-  let movies = read(films.txt).split('/n');
+const fs = require('fs')
+let movies;
+fs.readFile('./films.txt', 'utf-8', (err, data) => { 
+    if (err) throw err;  
+    movies = data;
+    console.log(movies);
+  });
   console.log(movies);
 
+// let movieList = new List(); 
+    // for(let i = 0; i < movies.length; ++i) {
+    //     movieList.append(movies[i]);
+    // }
+    //console.log(movieList);
 
-
-
-
+    //use promises!!!!!!! for async OR use readFileSync
+    
+     
