@@ -662,17 +662,18 @@ function List() {
     this.find = find;
     this.remove = remove;
     this.length = length;
-    // this.clear = clear;
-    // this.toString = toString;
-    // this.insert = insert;
-    // this.front = front;
-    // this.end = end;
-    // this.prev = prev;
-    // this.next = next;
-    // this.currPos = currPos;
-    // this.moveTo = moveTo;
-    // this.getElement = getElement;
-    // this.contains = contains;
+    this.toString = toString;
+    this.insert = insert;
+    this.clear = clear;
+    this.contains = contains;
+    this.front = front;
+    this.end = end;
+    this.prev = prev;
+    this.next = next;
+    this.currPos = currPos;
+    this.moveTo = moveTo;
+    this.getElement = getElement;
+   
 
     function append(element) {
         this.dataStore[this.listSize++] = element;
@@ -697,20 +698,90 @@ function List() {
     function length() {
         return this.listSize;
     }
-  
-
+    function toString() {
+        return this.dataStore;
+    }
+    function insert(element, after) {
+        let insPos = this.find(after);
+        if(insPos > -1) {
+            this.dataStore.splice(insPos+1, 0, element);
+            ++this.listSize;
+            return true;
+        }
+        return false;
+    }
+    function clear() {
+        delete this.dataStore;
+        this.dataStore = [];
+        this.listSize = this.pos = 0;
+    }
+    function contains(element) {
+        for(let i = 0; i < this.dataStore.length; ++i) {
+            if(this.dataStore[i] == element) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function front() {
+        this.pos = 0;
+    }
+    function end() {
+        this.pos = this.listSize-1;
+    }
+    function prev() {
+        if(this.pos > 0) {
+            --this.pos;
+        }
+    }
+    function next() {
+        if(this.pos < this.listSize-1) {
+            ++this.pos;
+        }
+    }
+    function currPos() {
+        return this.pos;
+    }
+    function moveTo(position) {
+        this.pos = position;
+    }
+    function getElement() {
+        return this.dataStore[this.pos];
+    }
 }
 
-let newList = new List();
-newList.append(1);
-newList.append('cat');
-newList.append('dog');
-newList.remove('cat');
+// let newList = new List();
+// newList.append(1);
+// newList.append('cat');
+// newList.append('dog');
+// newList.remove('cat');
+// newList.insert('cat', 'dog');
+// newList.clear();
+// newList.front();
+// newList.end();
+// newList.prev();
+// newList.next();
+// newList.currPos();
+// newList.moveTo(0);
 
 //console.log(newList.dataStore);
 //console.log(newList.find('dog'));
-console.log(newList.length());
+//console.log(newList.length());
+//console.log(newList.toString());
+//console.log(newList.contains('cat'));
+//console.log(newList.getElement());
 
+//Iterating Through a List................................................
+// for(newList.front(); newList.currPos() < newList.length(); newList.next()) {
+//    //console.log(newList.getElement());
+// }
+// for(newList.end(); newList.currPos() >= 0; newList.prev()) {
+//    //console.log(newList.getElement());
+// }
+
+//A List-Based Application................................................
+  let movies = read(films.txt).split('/n');
+  console.log(movies);
 
 
 
