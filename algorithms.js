@@ -730,13 +730,13 @@ function List() {
         this.pos = this.listSize-1;
     }
     function prev() {
-        if(this.pos > 0) {
-            --this.pos;
+        if(this.pos >= 0) {
+             --this.pos;
         }
     }
     function next() {
-        if(this.pos < this.listSize-1) {
-            ++this.pos;
+        if(this.pos < this.listSize) {
+             ++this.pos;
         }
     }
     function currPos() {
@@ -773,28 +773,71 @@ function List() {
 
 //Iterating Through a List................................................
 // for(newList.front(); newList.currPos() < newList.length(); newList.next()) {
-//    //console.log(newList.getElement());
+//    console.log(newList.getElement());
 // }
 // for(newList.end(); newList.currPos() >= 0; newList.prev()) {
-//    //console.log(newList.getElement());
+//    console.log(newList.getElement());
 // }
 
 //A List-Based Application................................................
-const fs = require('fs')
-let movies;
-fs.readFile('./films.txt', 'utf-8', (err, data) => { 
-    if (err) throw err;  
-    movies = data;
-    console.log(movies);
-  });
-  console.log(movies);
+const fs = require('fs');
+// const readline = require('readline');
+function createArr(file) {
+    let arr = fs.readFileSync(file,'utf8');
+    let arrN = arr.split("\n");
+    for(let i = 0; i < arrN.length; ++i) {
+        arrN[i] = arrN[i].trim();
+    }
+    return arrN;
+}
+let movies = createArr('films.txt');
 
-// let movieList = new List(); 
-    // for(let i = 0; i < movies.length; ++i) {
-    //     movieList.append(movies[i]);
-    // }
-    //console.log(movieList);
+let movieList = new List();
+for(let i = 0; i < movies.length; ++i) {
+    movieList.append(movies[i]);
+}
 
-    //use promises!!!!!!! for async OR use readFileSync
+let customers = new List();
+
+function Customer(name, movie) {
+    this.name = name;
+    this.movie = movie;
+}
+
+function displayList(list) {
+    for(list.front(); list.currPos() < list.length(); list.next()) {
+        if(list.getElement() instanceof Customer) {
+            console.log(list.getElement()['name'] + ', ' + list.getElement()['movie']);
+        } else {
+            console.log(list.getElement());
+        }
+    }
+}
+
+function checkOut(name, movie, filmList, customerList) {
+    if(movieList.contains(movie)) {
+        let c = new Customer(name,movie);
+        customerList.append(c);
+        filmList.remove(movie);
+    } 
+    else {
+        console.log(`${movie} is not available`);
+    }
+}
+
+console.log("Available movies: \n");
+displayList(movieList);
+// putstr("Enter your name: ");
+// let name = readline();
+checkOut('Jane Doe', 'The Godfather', movieList, customers);
+console.log("\nCustomer Rentals: \n");
+displayList(customers);
+console.log("\nMovies now available: \n");
+displayList(movieList);
+
+
+
+
+
     
      
