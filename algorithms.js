@@ -781,7 +781,11 @@ function List() {
 
 //A List-Based Application................................................
 const fs = require('fs');
-// const readline = require('readline');
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
 function createArr(file) {
     let arr = fs.readFileSync(file,'utf8');
     let arrN = arr.split("\n");
@@ -827,13 +831,18 @@ function checkOut(name, movie, filmList, customerList) {
 
 console.log("Available movies: \n");
 displayList(movieList);
-// putstr("Enter your name: ");
-// let name = readline();
-checkOut('Jane Doe', 'The Godfather', movieList, customers);
-console.log("\nCustomer Rentals: \n");
-displayList(customers);
-console.log("\nMovies now available: \n");
-displayList(movieList);
+readline.question('Enter your name: ', name => {
+     readline.question('What movie would you like? ', movie => {
+    checkOut(name, movie, movieList, customers);
+    console.log("\nCustomer Rentals: \n");
+    displayList(customers);
+    console.log("\nMovies now available: \n");
+    displayList(movieList);
+    readline.close();
+     });
+  });
+
+
 
 
 
