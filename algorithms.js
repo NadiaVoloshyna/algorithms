@@ -818,6 +818,34 @@ function displayList(list) {
     }
 }
 
+function insertElementB(element, list) {
+    let found = 0;
+    for(list.front(); list.currPos() < list.length(); list.next()) {
+    if(list.getElement().toLowerCase().charCodeAt(0)-96 > element.toLowerCase().charCodeAt(0)-96) { 
+        found++;
+    }
+    }
+    if(found != 0) {
+        console.log(`${element} doesn/t fit`);
+    } else {
+        list.append(element);
+    }
+}
+
+function insertElementS(element, list) {
+    let found = 0;
+    for(list.front(); list.currPos() < list.length(); list.next()) {
+    if(list.getElement().toLowerCase().charCodeAt(0)-96 < element.toLowerCase().charCodeAt(0)-96) { 
+        found++;
+    }
+    }
+    if(found != 0) {
+        console.log(`${element} doesn't fit`);
+    } else {
+        list.append(element);
+    }
+}
+
 function checkOut(name, movie, filmList, customerList) {
     if(movieList.contains(movie)) {
         let c = new Customer(name,movie);
@@ -831,22 +859,19 @@ function checkOut(name, movie, filmList, customerList) {
 
 console.log("Available movies: \n");
 displayList(movieList);
-readline.question('Enter your name: ', name => {
-     readline.question('What movie would you like? ', movie => {
-    checkOut(name, movie, movieList, customers);
-    console.log("\nCustomer Rentals: \n");
-    displayList(customers);
-    console.log("\nMovies now available: \n");
-    displayList(movieList);
-    readline.close();
-     });
-  });
+insertElementS('American', movieList);
+console.log("Available movies: \n");
+displayList(movieList);
 
-
-
-
-
-
-
-    
-     
+// console.log("Available movies: \n");
+// displayList(movieList);
+// readline.question('Enter your name: ', name => {
+// readline.question('What movie would you like? ', movie => {
+// checkOut(name, movie, movieList, customers);
+// console.log("\nCustomer Rentals: \n");
+// displayList(customers);
+// console.log("\nMovies now available: \n");
+// displayList(movieList);
+// readline.close();
+// });
+// });
