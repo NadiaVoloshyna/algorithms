@@ -654,101 +654,101 @@
 //Lists...................................................................
 //A List ADT..............................................................
 //A List Class Implementation.............................................
-function List() {
-    this.listSize = 0;
-    this.pos = 0;
-    this.dataStore = [];
-    this.append = append;
-    this.find = find;
-    this.remove = remove;
-    this.length = length;
-    this.toString = toString;
-    this.insert = insert;
-    this.clear = clear;
-    this.contains = contains;
-    this.front = front;
-    this.end = end;
-    this.prev = prev;
-    this.next = next;
-    this.currPos = currPos;
-    this.moveTo = moveTo;
-    this.getElement = getElement;
+// function List() {
+//     this.listSize = 0;
+//     this.pos = 0;
+//     this.dataStore = [];
+//     this.append = append;
+//     this.find = find;
+//     this.remove = remove;
+//     this.length = length;
+//     this.toString = toString;
+//     this.insert = insert;
+//     this.clear = clear;
+//     this.contains = contains;
+//     this.front = front;
+//     this.end = end;
+//     this.prev = prev;
+//     this.next = next;
+//     this.currPos = currPos;
+//     this.moveTo = moveTo;
+//     this.getElement = getElement;
    
 
-    function append(element) {
-        this.dataStore[this.listSize++] = element;
-    }
-    function find(element) {
-        for(let i = 0; i < this.dataStore.length; ++i) {
-            if(this.dataStore[i] == element) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    function remove(element) {
-        let foundAt = this.find(element);
-        if(foundAt > -1) {
-            this.dataStore.splice(foundAt,1)
-            --this.listSize;
-            return true;
-        }
-        return false
-    }
-    function length() {
-        return this.listSize;
-    }
-    function toString() {
-        return this.dataStore;
-    }
-    function insert(element, after) {
-        let insPos = this.find(after);
-        if(insPos > -1) {
-            this.dataStore.splice(insPos+1, 0, element);
-            ++this.listSize;
-            return true;
-        }
-        return false;
-    }
-    function clear() {
-        delete this.dataStore;
-        this.dataStore = [];
-        this.listSize = this.pos = 0;
-    }
-    function contains(element) {
-        for(let i = 0; i < this.dataStore.length; ++i) {
-            if(this.dataStore[i] == element) {
-                return true;
-            }
-        }
-        return false;
-    }
-    function front() {
-        this.pos = 0;
-    }
-    function end() {
-        this.pos = this.listSize-1;
-    }
-    function prev() {
-        if(this.pos >= 0) {
-             --this.pos;
-        }
-    }
-    function next() {
-        if(this.pos < this.listSize) {
-             ++this.pos;
-        }
-    }
-    function currPos() {
-        return this.pos;
-    }
-    function moveTo(position) {
-        this.pos = position;
-    }
-    function getElement() {
-        return this.dataStore[this.pos];
-    }
-}
+//     function append(element) {
+//         this.dataStore[this.listSize++] = element;
+//     }
+//     function find(element) {
+//         for(let i = 0; i < this.dataStore.length; ++i) {
+//             if(this.dataStore[i] == element) {
+//                 return i;
+//             }
+//         }
+//         return -1;
+//     }
+//     function remove(element) {
+//         let foundAt = this.find(element);
+//         if(foundAt > -1) {
+//             this.dataStore.splice(foundAt,1)
+//             --this.listSize;
+//             return true;
+//         }
+//         return false
+//     }
+//     function length() {
+//         return this.listSize;
+//     }
+//     function toString() {
+//         return this.dataStore;
+//     }
+//     function insert(element, after) {
+//         let insPos = this.find(after);
+//         if(insPos > -1) {
+//             this.dataStore.splice(insPos+1, 0, element);
+//             ++this.listSize;
+//             return true;
+//         }
+//         return false;
+//     }
+//     function clear() {
+//         delete this.dataStore;
+//         this.dataStore = [];
+//         this.listSize = this.pos = 0;
+//     }
+//     function contains(element) {
+//         for(let i = 0; i < this.dataStore.length; ++i) {
+//             if(this.dataStore[i] == element) {
+//                 return true;
+//             }
+//         }
+//         return false;
+//     }
+//     function front() {
+//         this.pos = 0;
+//     }
+//     function end() {
+//         this.pos = this.listSize-1;
+//     }
+//     function prev() {
+//         if(this.pos >= 0) {
+//              --this.pos;
+//         }
+//     }
+//     function next() {
+//         if(this.pos < this.listSize) {
+//              ++this.pos;
+//         }
+//     }
+//     function currPos() {
+//         return this.pos;
+//     }
+//     function moveTo(position) {
+//         this.pos = position;
+//     }
+//     function getElement() {
+//         return this.dataStore[this.pos];
+//     }
+// }
 
 // let newList = new List();
 // newList.append(1);
@@ -780,98 +780,201 @@ function List() {
 // }
 
 //A List-Based Application................................................
-const fs = require('fs');
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
+// const fs = require('fs');
+// const readline = require('readline').createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+//   });
 
-function createArr(file) {
-    let arr = fs.readFileSync(file,'utf8');
-    let arrN = arr.split("\n");
-    for(let i = 0; i < arrN.length; ++i) {
-        arrN[i] = arrN[i].trim();
-    }
-    return arrN;
-}
-let movies = createArr('films.txt');
+// function createArr(file) {
+//     let arr = fs.readFileSync(file,'utf8');
+//     let arrN = arr.split("\n");
+//     for(let i = 0; i < arrN.length; ++i) {
+//         arrN[i] = arrN[i].trim();
+//     }
+//     return arrN;
+// }
+// let movies = createArr('films.txt');
 
-let movieList = new List();
-for(let i = 0; i < movies.length; ++i) {
-    movieList.append(movies[i]);
-}
+// let movieList = new List();
+// for(let i = 0; i < movies.length; ++i) {
+//     movieList.append(movies[i]);
+// }
 
-let customers = new List();
+// let customers = new List();
 
-function Customer(name, movie) {
-    this.name = name;
-    this.movie = movie;
-}
+// function Customer(name, movie) {
+//     this.name = name;
+//     this.movie = movie;
+// }
 
-function displayList(list) {
-    for(list.front(); list.currPos() < list.length(); list.next()) {
-        if(list.getElement() instanceof Customer) {
-            console.log(list.getElement()['name'] + ', ' + list.getElement()['movie']);
-        } else {
-            console.log(list.getElement());
-        }
-    }
-}
+// let rentedMovies = new List();
 
-function insertElementB(element, list) {
-    let found = 0;
-    for(list.front(); list.currPos() < list.length(); list.next()) {
-    if(list.getElement().toLowerCase().charCodeAt(0)-96 > element.toLowerCase().charCodeAt(0)-96) { 
-        found++;
-    }
-    }
-    if(found != 0) {
-        console.log(`${element} doesn/t fit`);
-    } else {
-        list.append(element);
-    }
-}
+// function displayList(list) {
+//     for(list.front(); list.currPos() < list.length(); list.next()) {
+//         if(list.getElement() instanceof Customer) {
+//             console.log(list.getElement()['name'] + ', ' + list.getElement()['movie']);
+//         } else {
+//             console.log(list.getElement());
+//         }
+//     }
+// }
 
-function insertElementS(element, list) {
-    let found = 0;
-    for(list.front(); list.currPos() < list.length(); list.next()) {
-    if(list.getElement().toLowerCase().charCodeAt(0)-96 < element.toLowerCase().charCodeAt(0)-96) { 
-        found++;
-    }
-    }
-    if(found != 0) {
-        console.log(`${element} doesn't fit`);
-    } else {
-        list.append(element);
-    }
-}
+// function checkOut(name, movie, filmList, customerList, rentedList) {
+//     if(movieList.contains(movie)) {
+//         let c = new Customer(name,movie);
+//         customerList.append(c);
+//         filmList.remove(movie);
+//         rentedList.append(movie);
+//     } 
+//     else {
+//         console.log(`${movie} is not available`);
+//     }
+// }
 
-function checkOut(name, movie, filmList, customerList) {
-    if(movieList.contains(movie)) {
-        let c = new Customer(name,movie);
-        customerList.append(c);
-        filmList.remove(movie);
-    } 
-    else {
-        console.log(`${movie} is not available`);
-    }
-}
-
-console.log("Available movies: \n");
-displayList(movieList);
-insertElementS('American', movieList);
-console.log("Available movies: \n");
-displayList(movieList);
+// function checkIn(movie, filmList, rentedList) {
+//     if(rentedList.contains(movie)) {
+//         filmList.append(movie);
+//         rentedList.remove(movie);
+//         console.log(`Rented ${movie} is returned`);
+//     } else {
+//         console.log(`${movie} is not in the rentedList`);
+//     }
+// }
 
 // console.log("Available movies: \n");
 // displayList(movieList);
 // readline.question('Enter your name: ', name => {
 // readline.question('What movie would you like? ', movie => {
-// checkOut(name, movie, movieList, customers);
+// checkOut(name, movie, movieList, customers, rentedMovies);
 // console.log("\nCustomer Rentals: \n");
 // displayList(customers);
 // console.log("\nMovies now available: \n");
 // displayList(movieList);
+// console.log("\nRented movies: \n");
+// displayList(rentedMovies);
+// readline.question('\nWhat movie are you returning?: \n', movie => {
+// checkIn(movie, movieList, rentedMovies);
+// console.log("\nMovies now available: \n");
+// displayList(movieList);
+// console.log("\nRented movies: \n");
+// displayList(rentedMovies);
 // readline.close();
 // });
 // });
+// });
+
+// function insertElementB(element, list) {
+//     let found = 0;
+//     for(list.front(); list.currPos() < list.length(); list.next()) {
+//     if(list.getElement().toLowerCase().charCodeAt(0)-96 > element.toLowerCase().charCodeAt(0)-96) { 
+//         found++;
+//     }
+//     }
+//     if(found != 0) {
+//         console.log(`${element} doesn/t fit`);
+//     } else {
+//         list.append(element);
+//     }
+// }
+
+// function insertElementS(element, list) {
+//     let found = 0;
+//     for(list.front(); list.currPos() < list.length(); list.next()) {
+//     if(list.getElement().toLowerCase().charCodeAt(0)-96 < element.toLowerCase().charCodeAt(0)-96) { 
+//         found++;
+//     }
+//     }
+//     if(found != 0) {
+//         console.log(`${element} doesn't fit`);
+//     } else {
+//         list.append(element);
+//     }
+// }
+
+// console.log("Available movies: \n");
+// displayList(movieList);
+// insertElementS('American', movieList);
+// console.log("Available movies: \n");
+// displayList(movieList);
+
+// let persons = new List();
+// class Person {
+//     constructor(name, gender) {
+//     this.name = name;
+//     this.gender = gender;
+//     }
+// }
+// let displayList = (list) => {
+//     for(list.front(); list.currPos() < list.length(); list.next()) {
+//         if(list.getElement()['gender'] = 'female') {
+//             console.log(list.getElement()['name'] + ', ' + list.getElement()['gender']);
+//         }
+//     }
+// }
+
+// let person1 = new Person('Alison', 'female');
+// let person2 = new Person('Bob', 'male');
+// let person3 = new Person('Mary', 'female');
+// let person4 = new Person('Ann', 'female');
+// let person5 = new Person('John', 'male');
+// let person6 = new Person('Peter', 'male');
+// let person7 = new Person('Susan', 'female');
+// let person8 = new Person('Steve', 'male');
+// let person9 = new Person('Pol', 'male');
+// let person10 = new Person('Sara', 'female');
+// persons.append(person1);
+// persons.append(person2);
+// persons.append(person3);
+// persons.append(person4);
+// persons.append(person5);
+// persons.append(person6);
+// persons.append(person7);
+// persons.append(person8);
+// persons.append(person9);
+// persons.append(person10);
+
+// displayList(persons);
+
+//Chapter 4. Stacks........................................................
+//Stack Operations.........................................................
+function Stack() {
+    this.dataStorage = [];
+    this.top = 0;
+    this.push = push;
+    this.pop = pop;
+    this.peek = peek;
+    this.clear = clear;
+    this.length = length;
+}
+function push(element) {
+    this.dataStorage[this.top++] = element;
+}
+function pop() {
+    return this.dataStorage[--this.top];
+}
+function peek() {
+    return this.dataStorage[this.top-1];
+}
+function clear() {
+    this.top = 0;
+}
+function length() {
+    return this.top;
+}
+
+let test = new Stack();
+test.push('green');
+test.push('yellow');
+test.push('blue');
+console.log(test.length());
+console.log(test.peek());
+let popped = test.pop();
+console.log(popped);
+console.log(test.peek());
+test.push('red');
+console.log(test.peek());
+test.clear();
+console.log(test.length());
+console.log(test.peek());
+    
