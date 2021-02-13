@@ -938,6 +938,7 @@
 
 //Chapter 4. Stacks........................................................
 //Stack Operations.........................................................
+//A Stack Implementation...................................................
 function Stack() {
     this.dataStorage = [];
     this.top = 0;
@@ -963,18 +964,65 @@ function length() {
     return this.top;
 }
 
-let test = new Stack();
-test.push('green');
-test.push('yellow');
-test.push('blue');
-console.log(test.length());
-console.log(test.peek());
-let popped = test.pop();
-console.log(popped);
-console.log(test.peek());
-test.push('red');
-console.log(test.peek());
-test.clear();
-console.log(test.length());
-console.log(test.peek());
+// let test = new Stack();
+// test.push('green');
+// test.push('yellow');
+// test.push('blue');
+// console.log(test.length());
+// console.log(test.peek());
+// let popped = test.pop();
+// console.log(popped);
+// console.log(test.peek());
+// test.push('red');
+// console.log(test.peek());
+// test.clear();
+// console.log(test.length());
+// console.log(test.peek());
+
+//Using the Stack Class......................................................
+//Multiple Base Conversions..................................................
+// let mulBase = (num, base) => {
+//     let s = new Stack();
+//     while(num > 0) {
+//         s.push(num % base);
+//         num = Math.floor(num /= base);
+//     }
+//     converted = '';
+//     while(s.length() > 0) {
+//         converted += s.pop();
+//     }
+//     return converted;
+// }
+
+// let num = 32;
+// let base = 2;
+// let result = mulBase(num, base);
+// console.log(`${num} converted to ${base} base is ${result}`);
+
+//Palindromes................................................................
+// let func = (word) => {
+//     let s = new Stack();
+//     for (i = 0; i < word.length; ++i) {
+//         s.push(word[i]);
+//     }
+//     let rword = '';
+//     while(s.length() > 0) {
+//         rword += s.pop();
+//     }
+//     if(word == rword) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
+
+// let word = 'racecar';
+// if(func(word)) {
+//     console.log(`${word} is a palindrome`);
+// } else {
+//     console.log(`${word} is not a palindrome`);
+// }
+
+//Demonstrating Recursion....................................................
+
     
