@@ -1024,5 +1024,49 @@ function length() {
 // }
 
 //Demonstrating Recursion....................................................
-
+// let fact = (n) => {
+//     if(n === 0) {
+//         return 1;
+//     } else {
+//          return n * fact(n-1);
+//      }
+// }
+// let factor = (n) => {
+//     let s = new Stack();
+//     while(n > 1) {
+//         s.push(n--);
+//     }
+//     let product = 1;
+//     while(s.length() > 0) {
+//         product *= s.pop();
+//     }
+//     return product;
+// }
     
+// console.log(fact(5));
+// console.log(factor(5));
+
+//Exercises..................................................................
+// let func = (exp) => {
+//     let s = new Stack();
+//     for (i = 0; i < exp.length; i++) {
+//         if(exp[i] === '(') {
+//             s.push(exp[i]);
+//         }
+//         if(exp[i] === ')') {
+//             if(s.pop() === undefined) {
+//                 console.log("Mismatched ) at " + i);
+//             }
+//         }
+//     }
+//     if (s.length() === 0) { 
+//         console.log("no mismatching parens!");
+//       } else if (s.length() > 0) {
+//         console.log("Mismatching ( at position " + s.peek());
+//       }
+// }
+
+// func('2.3 + 23 / 12 + (3.14159 * .24.');
+
+
+
