@@ -1068,5 +1068,46 @@ function length() {
 
 // func('2.3 + 23 / 12 + (3.14159 * .24.');
 
+let func = (exp) => {
+    let operators = new Stack();
+    let result = '';
+    let precedence = (operator) => {
+		switch(operator){
+		case '*':
+		case '/':
+			return 2;
+		case '+':
+		case '-':
+			return 1;
+		}
+	}
+    for(i = 0; i < exp.length; i++) {
+        let c = exp[i];
+        if(!isNaN(parseInt(c))) {
+            result += c;
+        }
+        else if(precedence(c) >= precedence(operators.peek()) || operators.dataStorage === [] ) {
+            //console.log(precedence(c));
+            //console.log(precedence(operators.peek()));
+            operators.push(c);
+        }
+        else if(c === '+' || c === '-' || c === '*' || c === '/') {
+            while(operators.dataStorage !== [] && precedence(c) <= precedence(operators.peek())) {
+                result += operators.pop();
+            }
+            operators.push(c);
+        }
+    }
 
+   console.log(operators.dataStorage);
+   //while(operators.dataStorage.length > 0) {
+       result += operators.pop();
+       //result += operators.pop();
+   //}
+   console.log(operators.dataStorage);
+   return result;
+        
+}
+
+console.log(func('2*3+2*4'));
 
