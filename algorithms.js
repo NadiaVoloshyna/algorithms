@@ -1066,7 +1066,7 @@ function length() {
 //       }
 // }
 
-// func('2.3 + 23 / 12 + (3.14159 * .24.');
+// func('2.3 + 23 / 12 + (3.14159 * .24.')
 
 let func = (exp) => {
     let operators = new Stack();
@@ -1083,31 +1083,41 @@ let func = (exp) => {
 	}
     for(i = 0; i < exp.length; i++) {
         let c = exp[i];
+        let v = exp[i-1]
         if(!isNaN(parseInt(c))) {
-            result += c;
+            if(!isNaN(parseInt(v))) {
+                result += `${c}`;
+            } else {
+                result += ` ${c}`;
+            }
         }
-        else if(precedence(c) >= precedence(operators.peek()) || operators.dataStorage === [] ) {
-            //console.log(precedence(c));
-            //console.log(precedence(operators.peek()));
+        else if(precedence(c) > precedence(operators.peek()) || operators.dataStorage === [] || operators.dataStorage === ['(']) {
             operators.push(c);
         }
         else if(c === '+' || c === '-' || c === '*' || c === '/') {
-            while(operators.dataStorage !== [] && precedence(c) <= precedence(operators.peek())) {
-                result += operators.pop();
+            while(precedence(c) <= precedence(operators.peek())) {
+                result += ` ${operators.pop()}`;
             }
             operators.push(c);
         }
+        else if(c === '(') {
+            operators.push(c);
+        }
+        else if(c === ')') {
+            while(operators.peek() !== "(") {
+                result += ` ${operators.pop()}`;
+            }
+            operators.pop();
+        }
     }
-
-   console.log(operators.dataStorage);
-   //while(operators.dataStorage.length > 0) {
-       result += operators.pop();
-       //result += operators.pop();
-   //}
-   console.log(operators.dataStorage);
+    console.log(operators.dataStorage);
+   while(operators.dataStorage.length !== 0) {
+       result += ` ${operators.pop()}`;
+       operators.dataStorage.length--;
+   }
    return result;
-        
 }
 
-console.log(func('2*3+2*4'));
+console.log(func('(2+2)*3+4'));
+console.log(func('(2+2)*3+4*4'));
 
