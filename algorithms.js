@@ -1106,18 +1106,52 @@ let func = (exp) => {
         else if(c === ')') {
             while(operators.peek() !== "(") {
                 result += ` ${operators.pop()}`;
+                operators.dataStorage.length --;
             }
             operators.pop();
+            operators.dataStorage.length --;
         }
     }
-    console.log(operators.dataStorage);
    while(operators.dataStorage.length !== 0) {
        result += ` ${operators.pop()}`;
-       operators.dataStorage.length--;
+       operators.dataStorage.length --;
    }
-   return result;
+   console.log(result);
+   
+   for (i = 0; i < result.length; i++) {
+       let res = result[i];
+       let resp = result[i-1];
+       let resn = result[i+1];
+       let val2 = '';
+       let value2 = '';
+       let val1 = '';
+       let value1 = '';
+       if(!isNaN(parseInt(res))) {
+            operators.push(res);
+       }
+       else if(res === " ") {
+           if(!isNaN(parseInt(resp)) && !isNaN(parseInt(resn))) {
+            operators.push(res);
+           }
+       }
+       else if(res === '+' || res === '-' || res === '*' || res === '/') {
+        while(operators.peek() !== " ") {
+            value2 += operators.pop();
+        }
+        val2 = value2.split('').reverse().join('');
+        // operators.pop();
+        while(operators.dataStorage === []) {
+            value1 += operators.pop();
+        }
+        val1 = value1.split('').reverse().join('');
+
+           let calc = eval(`${val1} ${res} ${val2}`);
+           operators.push(calc);
+       }
+   };
+   evaluated = operators.pop();
+   console.log(evaluated);
 }
 
-console.log(func('(2+2)*3+4'));
-console.log(func('(2+2)*3+4*4'));
-
+func('(5+30)*(4-2)');
+// 5 30 + 4 2 - *
