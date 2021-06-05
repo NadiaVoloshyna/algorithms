@@ -1070,7 +1070,9 @@ function length() {
 
 let func = (exp) => {
     let operators = new Stack();
+    let foo = new Stack();
     let result = '';
+    let evaluated = '';
     let precedence = (operator) => {
 		switch(operator){
 		case '*':
@@ -1116,42 +1118,44 @@ let func = (exp) => {
        result += ` ${operators.pop()}`;
        operators.dataStorage.length --;
    }
+   result = result.trim();
    console.log(result);
    
    for (i = 0; i < result.length; i++) {
-       let res = result[i];
-       let resp = result[i-1];
-       let resn = result[i+1];
+       let r = result[i];
+       let next = result[i+1];
+       let prev = result[i-1];
        let val2 = '';
-       let value2 = '';
        let val1 = '';
-       let value1 = '';
-       if(!isNaN(parseInt(res))) {
-            operators.push(res);
-       }
-       else if(res === " ") {
-           if(!isNaN(parseInt(resp)) && !isNaN(parseInt(resn))) {
-            operators.push(res);
+       let calc = '';
+       let num = '';
+       
+       if(!isNaN(parseInt(r))) {
+           if (!isNaN(parseInt(next))) {
+               num += r;
+               num += next;
+               operators.push(num);
+               num = '';
+           } 
+           if (!isNaN(parseInt(prev))){
+               foo.push(r);
+           } 
+           if (isNaN(parseInt(prev)) && isNaN(parseInt(next))) {
+            operators.push(r);
            }
-       }
-       else if(res === '+' || res === '-' || res === '*' || res === '/') {
-        while(operators.peek() !== " ") {
-            value2 += operators.pop();
         }
-        val2 = value2.split('').reverse().join('');
-        // operators.pop();
-        while(operators.dataStorage === []) {
-            value1 += operators.pop();
-        }
-        val1 = value1.split('').reverse().join('');
+           console.log(operators.dataStorage);
+          
+       if(r === '+' || r === '-' || r === '*' || r === '/') {
+            val2 += operators.pop();
+            val1 += operators.pop();
 
-           let calc = eval(`${val1} ${res} ${val2}`);
-           operators.push(calc);
-       }
-   };
-   evaluated = operators.pop();
-   console.log(evaluated);
+        calc = eval(`${val1} ${r} ${val2}`);
+        operators.push(calc);
+        }
+   };    
+    evaluated += operators.pop();
+    console.log(evaluated);
 }
-
-func('(5+30)*(4-2)');
-// 5 30 + 4 2 - *
+func('(30+5)*(4-2)');
+//30 5 + 4 2 - *
